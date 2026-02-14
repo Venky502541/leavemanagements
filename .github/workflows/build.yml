@@ -6,11 +6,17 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04   # 🔥 VERY IMPORTANT
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+
+    - name: Clean conflicting Android env
+      run: |
+        unset ANDROID_NDK_ROOT
+        unset ANDROID_HOME
+        unset ANDROID_SDK_ROOT
 
     - name: Install system dependencies
       run: |
@@ -28,21 +34,22 @@ jobs:
         ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
         mkdir -p $ANDROID_HOME/cmdline-tools
         cd $ANDROID_HOME/cmdline-tools
+
         wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
         unzip commandlinetools-linux-11076708_latest.zip
         mv cmdline-tools latest
 
-        # 🔥 CRITICAL: create old sdkmanager path for buildozer
         mkdir -p $ANDROID_HOME/tools/bin
-        ln -s $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+        ln -sf $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+               $ANDROID_HOME/tools/bin/sdkmanager
 
-    - name: Accept Android SDK licenses
+    - name: Accept Android licenses
       run: |
         yes | $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses || true
 
-    - name: Build APK
+    - name: Build APK (verbose)
       run: |
-        buildozer android debug
+        buildozer -v android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
