@@ -16,17 +16,29 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y python3 python3-pip openjdk-17-jdk \
-        libssl-dev libffi-dev libsqlite3-dev zlib1g-dev unzip
+        libssl-dev libffi-dev libsqlite3-dev zlib1g-dev unzip wget
 
     - name: Install Buildozer
       run: |
         pip3 install --upgrade pip
         pip3 install buildozer cython
 
+    - name: Setup Android SDK cmdline-tools
+      run: |
+        ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
+        mkdir -p $ANDROID_HOME/cmdline-tools
+        cd $ANDROID_HOME/cmdline-tools
+        wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+        unzip commandlinetools-linux-11076708_latest.zip
+        mv cmdline-tools latest
+
+        # 🔥 CRITICAL: create old sdkmanager path for buildozer
+        mkdir -p $ANDROID_HOME/tools/bin
+        ln -s $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
+
     - name: Accept Android SDK licenses
       run: |
-        mkdir -p $HOME/.android
-        echo "y" | sdkmanager --licenses || true
+        yes | $HOME/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --licenses || true
 
     - name: Build APK
       run: |
