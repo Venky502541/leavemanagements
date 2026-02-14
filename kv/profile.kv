@@ -1,0 +1,105 @@
+<ProfileScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        # ===== HEADER =====
+        BoxLayout:
+            size_hint_y: None
+            height: "72dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            canvas.before:
+                Color:
+                    rgba: 0.12, 0.53, 0.9, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: "⬅"
+                size_hint_x: None
+                width: "42dp"
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: "20sp"
+                on_press: root.go_back()
+
+            Label:
+                text: "My Profile"
+                color: 1,1,1,1
+                bold: True
+                font_size: "18sp"
+
+        # ===== BODY =====
+        ScrollView:
+            do_scroll_x: False
+
+            GridLayout:
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "24dp"
+                spacing: "12dp"
+                row_default_height: "34dp"
+                row_force_default: True
+
+                Label:
+                    text: "Full Name"
+                    bold: True
+                Label:
+                    id: name
+
+                Label:
+                    text: "Student ID"
+                    bold: True
+                Label:
+                    id: sid
+
+                Label:
+                    text: "Gender"
+                    bold: True
+                Label:
+                    id: gender
+
+                Label:
+                    text: "Branch"
+                    bold: True
+                Label:
+                    id: branch
+
+                Label:
+                    text: "Class / Section"
+                    bold: True
+                Label:
+                    id: class_section
+
+                Label:
+                    text: "Year"
+                    bold: True
+                Label:
+                    id: year
+
+                Label:
+                    text: "Mobile"
+                    bold: True
+                Label:
+                    id: mobile
+
+                Label:
+                    text: "Address"
+                    bold: True
+                Label:
+                    id: address
+
+                Label:
+                    text: "Parent Name"
+                    bold: True
+                Label:
+                    id: parent_name
+
+                Label:
+                    text: "Parent Mobile"
+                    bold: True
+                Label:
+                    id: parent_mobile

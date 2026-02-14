@@ -1,0 +1,163 @@
+<RegisterScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        # ===== HEADER =====
+        BoxLayout:
+            size_hint_y: None
+            height: "72dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            canvas.before:
+                Color:
+                    rgba: 0.12, 0.53, 0.9, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: "⬅"
+                size_hint_x: None
+                width: "42dp"
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: "20sp"
+                on_press: root.go_back()
+
+            Label:
+                text: "➕ Student Registration"
+                color: 1,1,1,1
+                bold: True
+                font_size: "18sp"
+
+        # ===== BODY =====
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_y: None
+                height: self.minimum_height
+                padding: "22dp"
+                spacing: "14dp"
+
+                canvas.before:
+                    Color:
+                        rgba: 0.95, 0.95, 0.95, 1
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+
+                # ===== CARD =====
+                BoxLayout:
+                    orientation: "vertical"
+                    size_hint_y: None
+                    height: self.minimum_height
+                    padding: "18dp"
+                    spacing: "12dp"
+
+                    canvas.before:
+                        Color:
+                            rgba: 1,1,1,1
+                        RoundedRectangle:
+                            pos: self.pos
+                            size: self.size
+                            radius: [18]
+
+                    TextInput:
+                        id: username
+                        hint_text: "👤 Username *"
+                        size_hint_y: None
+                        height: "48dp"
+                        multiline: False
+
+                    TextInput:
+                        id: password
+                        hint_text: "🔒 Password *"
+                        password: True
+                        size_hint_y: None
+                        height: "48dp"
+                        multiline: False
+
+                    TextInput:
+                        id: student_id
+                        hint_text: "🆔 Student ID / Roll No *"
+                        size_hint_y: None
+                        height: "48dp"
+                        multiline: False
+
+                    TextInput:
+                        id: full_name
+                        hint_text: "🧑 Full Name *"
+                        size_hint_y: None
+                        height: "48dp"
+                        multiline: False
+
+                    Spinner:
+                        id: gender
+                        text: "Male"
+                        values: ["Male", "Female", "Other"]
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: branch
+                        hint_text: "🎓 Branch / Department"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: class_section
+                        hint_text: "🏫 Class / Section"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: year
+                        hint_text: "📆 Year"
+                        input_filter: "int"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: mobile
+                        hint_text: "📞 Mobile Number"
+                        input_filter: "int"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: address
+                        hint_text: "🏠 Address"
+                        size_hint_y: None
+                        height: "80dp"
+
+                    TextInput:
+                        id: parent_name
+                        hint_text: "👪 Parent / Guardian Name"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    TextInput:
+                        id: parent_mobile
+                        hint_text: "☎ Parent Contact Number"
+                        input_filter: "int"
+                        size_hint_y: None
+                        height: "48dp"
+
+                    Button:
+                        text: "✅ Register Student"
+                        size_hint_y: None
+                        height: "52dp"
+                        font_size: "16sp"
+                        background_color: 0.1, 0.7, 0.3, 1
+                        color: 1,1,1,1
+                        on_press: root.register_student(username.text, password.text, student_id.text, full_name.text, gender.text, branch.text, class_section.text, year.text, mobile.text, address.text, parent_name.text, parent_mobile.text)
+
+                    Label:
+                        id: msg
+                        text: ""
+                        color: 0, 0.6, 0, 1
+                        size_hint_y: None
+                        height: "28dp"

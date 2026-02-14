@@ -1,0 +1,90 @@
+<DashboardScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        # ===== HEADER =====
+        BoxLayout:
+            size_hint_y: None
+            height: "72dp"
+            padding: "20dp"
+
+            canvas.before:
+                Color:
+                    rgba: 0.12, 0.53, 0.9, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Label:
+                id: info
+                text: "Dashboard"
+                color: 1,1,1,1
+                font_size: "20sp"
+                bold: True
+
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: "22dp"
+                spacing: "16dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+                Button:
+                    text: "📝  Apply Leave"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.12, 0.53, 0.9, 1
+                    color: 1,1,1,1
+                    on_press: root.go_apply()
+
+                Button:
+                    text: "📜  Leave History"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.12, 0.53, 0.9, 1
+                    color: 1,1,1,1
+                    on_press: root.go_history()
+
+                Button:
+                    id: approvals_btn
+                    text: "✅  Pending Approvals"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.1, 0.7, 0.3, 1
+                    color: 1,1,1,1
+                    on_press: root.go_approvals()
+
+                Button:
+                    id: register_btn
+                    text: "➕  Register Student"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.6, 0.4, 0.9, 1
+                    color: 1,1,1,1
+                    on_press: root.go_register()
+
+                Button:
+                    id: profile_btn
+                    text: "👤  My Profile"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.3, 0.5, 0.7, 1
+                    color: 1,1,1,1
+                    on_press: root.go_profile()
+
+                Button:
+                    text: "🚪  Logout"
+                    height: "54dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.9, 0.2, 0.2, 1
+                    color: 1,1,1,1
+                    on_press: root.logout()

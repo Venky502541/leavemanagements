@@ -1,0 +1,93 @@
+<LoginScreen>:
+    FloatLayout:
+
+        # ===== BACKGROUND =====
+        canvas.before:
+            Color:
+                rgba: 0.12, 0.53, 0.9, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        # ===== LOGIN CARD =====
+        BoxLayout:
+            orientation: "vertical"
+            size_hint: 0.88, None
+            height: "420dp"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            padding: "24dp"
+            spacing: "16dp"
+
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [22]
+
+            # ===== TITLE =====
+            Label:
+                text: "🎓 Student Leave System"
+                font_size: "22sp"
+                bold: True
+                color: 0.1, 0.1, 0.1, 1
+                size_hint_y: None
+                height: "40dp"
+
+            Label:
+                text: "Login to continue"
+                font_size: "14sp"
+                color: 0.4, 0.4, 0.4, 1
+                size_hint_y: None
+                height: "20dp"
+
+            # ===== USERNAME =====
+            TextInput:
+                id: username
+                hint_text: "👤 Username"
+                multiline: False
+                size_hint_y: None
+                height: "48dp"
+                background_color: 0.95, 0.95, 0.95, 1
+                foreground_color: 0, 0, 0, 1
+                padding: [12, 12, 12, 12]
+
+            # ===== PASSWORD =====
+            TextInput:
+                id: password
+                hint_text: "🔒 Password"
+                password: True
+                multiline: False
+                size_hint_y: None
+                height: "48dp"
+                background_color: 0.95, 0.95, 0.95, 1
+                foreground_color: 0, 0, 0, 1
+                padding: [12, 12, 12, 12]
+
+            # ===== ROLE =====
+            Spinner:
+                id: role
+                text: "Student"
+                values: ["Student", "HOD", "Warden", "Principal"]
+                size_hint_y: None
+                height: "48dp"
+                background_color: 0.95, 0.95, 0.95, 1
+
+            # ===== LOGIN BUTTON =====
+            Button:
+                text: "➡ LOGIN"
+                size_hint_y: None
+                height: "52dp"
+                font_size: "16sp"
+                background_color: 0.12, 0.53, 0.9, 1
+                color: 1, 1, 1, 1
+                on_press: root.do_login(username.text, password.text, role.text)
+
+            # ===== MESSAGE =====
+            Label:
+                id: msg
+                text: ""
+                color: 1, 0.2, 0.2, 1
+                size_hint_y: None
+                height: "24dp"

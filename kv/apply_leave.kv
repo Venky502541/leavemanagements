@@ -1,0 +1,80 @@
+<ApplyLeaveScreen>:
+    BoxLayout:
+        orientation: "vertical"
+
+        # ===== HEADER =====
+        BoxLayout:
+            size_hint_y: None
+            height: "72dp"
+            padding: "20dp"
+            spacing: "10dp"
+
+            canvas.before:
+                Color:
+                    rgba: 0.12, 0.53, 0.9, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            Button:
+                text: "⬅"
+                size_hint_x: None
+                width: "42dp"
+                background_color: 0,0,0,0
+                color: 1,1,1,1
+                font_size: "20sp"
+                on_press: root.go_back()
+
+            Label:
+                text: "📝 Apply Leave"
+                color: 1,1,1,1
+                font_size: "18sp"
+                bold: True
+
+        ScrollView:
+            do_scroll_x: False
+
+            BoxLayout:
+                orientation: "vertical"
+                padding: "24dp"
+                spacing: "14dp"
+                size_hint_y: None
+                height: self.minimum_height
+
+                Spinner:
+                    id: reason
+                    text: "📌 Select Reason"
+                    values: ["Sick", "Personal", "Emergency", "Function"]
+                    height: "48dp"
+                    size_hint_y: None
+
+                TextInput:
+                    id: start
+                    hint_text: "📅 Start Date (YYYY-MM-DD)"
+                    height: "48dp"
+                    size_hint_y: None
+
+                TextInput:
+                    id: end
+                    hint_text: "📅 End Date (YYYY-MM-DD)"
+                    height: "48dp"
+                    size_hint_y: None
+
+                TextInput:
+                    id: desc
+                    hint_text: "✍ Description"
+                    height: "90dp"
+                    size_hint_y: None
+
+                Button:
+                    text: "✅ Submit Leave"
+                    height: "52dp"
+                    size_hint_y: None
+                    font_size: "16sp"
+                    background_color: 0.1, 0.7, 0.3, 1
+                    color: 1,1,1,1
+                    on_press: root.submit_leave(reason.text, start.text, end.text, desc.text)
+
+                Label:
+                    id: msg
+                    color: 0,0.6,0,1
