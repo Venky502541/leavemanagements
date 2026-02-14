@@ -12,16 +12,31 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install dependencies
+    - name: Install system dependencies
       run: |
         sudo apt update
         sudo apt install -y python3 python3-pip openjdk-17-jdk \
-        libssl-dev libffi-dev libsqlite3-dev zlib1g-dev
+        unzip wget libssl-dev libffi-dev libsqlite3-dev zlib1g-dev
 
     - name: Install Buildozer
       run: |
         pip3 install --upgrade pip
         pip3 install buildozer cython
+
+    - name: Setup Android SDK
+      run: |
+        mkdir -p $HOME/android-sdk/cmdline-tools
+        cd $HOME/android-sdk/cmdline-tools
+        wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+        unzip commandlinetools-linux-*.zip
+        mv cmdline-tools latest
+
+        echo "ANDROID_HOME=$HOME/android-sdk" >> $GITHUB_ENV
+        echo "PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$HOME/android-sdk/platform-tools:$PATH" >> $GITHUB_ENV
+
+    - name: Accept Android SDK licenses
+      run: |
+        yes | sdkmanager --licenses || true
 
     - name: Build APK
       run: |
